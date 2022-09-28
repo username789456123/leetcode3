@@ -1,0 +1,24 @@
+int maxArea(int* height, int heightSize)
+{
+    int leftindex = 0;
+    int rightindex= heightSize - 1;
+    int are = 0,maxare = 0;
+    int hight = 0,wide = 0;
+    while(leftindex < rightindex){
+        hight = fmin(height[leftindex],height[rightindex]);
+        wide = rightindex - leftindex;
+        are =  hight * wide;
+        if(maxare < are)
+        {
+            maxare = are;
+        }
+        if(height[leftindex] < height[rightindex]){
+            leftindex++;
+        }
+        else
+        {
+            rightindex--;
+        }
+    }
+    return maxare;
+}
