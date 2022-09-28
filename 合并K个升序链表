@@ -1,0 +1,37 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+
+struct ListNode* mergeKLists(struct ListNode** lists, int listsSize){
+    int i = 0, j = 0, m = 0;
+    struct ListNode *head = malloc(sizeof(struct ListNode));  //头结点
+    head->next = NULL;
+    struct ListNode *tail = head, *min = head;
+    while(1){
+        for(i = 0; (i < listsSize) && !lists[i]; i++){
+                                    //找到链表数组里第一个非空的元素
+        }
+        if(i < listsSize){
+            min = lists[i];
+            m = i;
+        }
+        else{                            //链表全空，退出循环
+            break;
+        }
+        for(j=i+1; j<listsSize; j++){     //记录链表最小结点的位置
+            if(lists[j] && (lists[j]->val < min->val)){
+                min = lists[j];
+                m = j;
+            }
+        }
+        tail->next = min;                     //将最小结点加入head链表
+        tail = tail->next;
+        lists[m] = lists[m]->next;
+    }
+    return head->next;
+}
