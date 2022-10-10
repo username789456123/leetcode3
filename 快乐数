@@ -1,0 +1,36 @@
+int getHappySum(int n)
+{
+    int sum = 0;
+    int res = 0;
+    while(n)
+    {
+        res = n % 10;
+        sum += pow(res, 2);
+        n /= 10;
+    }
+    return sum;
+}
+
+bool isHappy(int n)
+{
+    int fastSum;
+    int slowSum;
+    slowSum = getHappySum(n);
+    fastSum = getHappySum(slowSum);
+
+    while(1)
+    {
+        if(slowSum == 1 || fastSum == 1)
+        {
+            break;
+        }
+        if(slowSum == fastSum)
+        {
+            return false;
+        }
+        slowSum = getHappySum(slowSum);
+        fastSum = getHappySum(fastSum);
+        fastSum = getHappySum(fastSum);
+    }
+    return true;
+}
